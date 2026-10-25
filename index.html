@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Тренажёр МЛД-1 — поиск первопричины боли</title>
+<meta name="description" content="Бесплатный учебный тренажёр по методике МЛД: шесть зон тела, поиск приоритетной зоны, каскад по субзонам и коррекция на трёхмерной анатомии. Николай Карушкин.">
+<meta name="author" content="Николай Карушкин">
+<meta name="theme-color" content="#dbe3e6">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<!-- карточка ссылки в телеграме и соцсетях -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coolnavigator108-code.github.io/mld1/">
+<meta property="og:site_name" content="Тренажёр МЛД-1">
+<meta property="og:title" content="Тренажёр МЛД-1 — поиск первопричины боли">
+<meta property="og:description" content="Шесть зон тела, приоритетная зона, каскад по субзонам и коррекция — на живой трёхмерной анатомии. Бесплатно, без регистрации.">
+<meta property="og:image" content="https://coolnavigator108-code.github.io/mld1/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Скелет с шестью размеченными зонами тела">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{
+  --ink:#16232a; --ink2:#4d6068; --faint:#8598a0;
+  --line:rgba(22,35,42,.13); --card:rgba(255,255,255,.90);
+  --tint:rgba(22,35,42,.05); --tint2:rgba(22,35,42,.045);
+  --cardsolid:rgb(252,252,251);
+  --shadow:0 2px 6px rgba(22,35,42,.07),0 14px 40px rgba(22,35,42,.11);
+  --bg:radial-gradient(ellipse 80% 60% at 50% 22%,#f5f8f8,#dbe3e6 55%,#bdcacd);
+  --chip:#16232a; --onchip:#ffffff;
+  --prov:#b8722c; --test:#1f7a6c; --ok:#2f8f5b; --bad:#b8433a;
+  --okbg:rgba(47,143,91,.14); --badbg:rgba(184,67,58,.12);
+  --panelok:rgba(240,250,244,.94); --panelbad:rgba(253,243,242,.94);
+  --panelcomp:rgba(238,248,246,.94); --mkbg:rgba(255,255,255,.93);
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e7eef0; --ink2:#a9bcc3; --faint:#7d919a;
+  --line:rgba(231,238,240,.14); --card:rgba(20,29,34,.88);
+  --tint:rgba(231,238,240,.07); --tint2:rgba(231,238,240,.06);
+  --cardsolid:rgb(18,26,30);
+  --shadow:0 2px 6px rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.45);
+  --bg:radial-gradient(ellipse 80% 60% at 50% 22%,#1d282e,#141d22 55%,#0d1316);
+  --chip:#e7eef0; --onchip:#10181c;
+  --prov:#d99a52; --test:#4fb9a6; --ok:#5bc189; --bad:#e2776c;
+  --okbg:rgba(91,193,137,.18); --badbg:rgba(226,119,108,.18);
+  --panelok:rgba(22,40,33,.92); --panelbad:rgba(44,26,25,.92);
+  --panelcomp:rgba(20,38,37,.92); --mkbg:rgba(20,29,34,.93);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e7eef0; --ink2:#a9bcc3; --faint:#7d919a;
+  --line:rgba(231,238,240,.14); --card:rgba(20,29,34,.88);
+  --tint:rgba(231,238,240,.07); --tint2:rgba(231,238,240,.06);
+  --cardsolid:rgb(18,26,30);
+  --shadow:0 2px 6px rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.45);
+  --bg:radial-gradient(ellipse 80% 60% at 50% 22%,#1d282e,#141d22 55%,#0d1316);
+  --chip:#e7eef0; --onchip:#10181c;
+  --prov:#d99a52; --test:#4fb9a6; --ok:#5bc189; --bad:#e2776c;
+  --okbg:rgba(91,193,137,.18); --badbg:rgba(226,119,108,.18);
+  --panelok:rgba(22,40,33,.92); --panelbad:rgba(44,26,25,.92);
+  --panelcomp:rgba(20,38,37,.92); --mkbg:rgba(20,29,34,.93);
+}
+*{box-sizing:border-box}
+.btn:focus-visible,.sb:focus-visible,.mk:focus-visible{outline:2px solid var(--test);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;font:14px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:var(--bg);overflow:hidden}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#boot{position:fixed;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;background:var(--bg);text-align:center;padding:0 20px}
+#boot .bt{font-size:19px;font-weight:650}
+#boot .bs{font-size:13px;color:var(--faint)}
+#boot .bs::after{content:"";display:inline-block;width:1em;text-align:left;
+  animation:dots 1.2s steps(4,end) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+
+.pane{position:fixed;z-index:6;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  backdrop-filter:blur(10px);box-shadow:var(--shadow)}
+
+/* шапка этапов */
+#head{left:20px;top:18px;width:330px;padding:16px 18px;max-height:calc(100vh - 36px);overflow-y:auto}
+#eyebrow{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--test)}
+#title{font-size:20px;font-weight:650;margin:3px 0 7px;line-height:1.25}
+#text{font-size:13px;color:var(--ink2)}
+#text b{color:var(--ink)}
+.tr{display:inline-block;background:var(--okbg);color:var(--ok);font-weight:700;
+  padding:2px 9px;border-radius:99px;font-size:12px;margin:2px 0}
+#text i, #text .ar{color:var(--faint);font-style:normal;margin:0 4px}
+
+#steps{list-style:none;display:flex;gap:5px;margin:14px 0 0;padding:0}
+#steps li{flex:1;font-size:10.5px;font-weight:700;text-align:center;padding:5px 2px;border-radius:7px;
+  background:var(--tint);color:var(--faint);opacity:.6}
+#steps li[data-active="true"]{opacity:1;background:var(--chip);color:var(--onchip)}
+#steps li[data-done="true"]{opacity:.95;background:var(--okbg);color:var(--ok)}
+
+#actions{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.btn{appearance:none;font:inherit;font-weight:700;font-size:13px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);padding:9px 15px;border-radius:99px;cursor:pointer;min-height:38px;
+  transition:border-color .15s,background .15s,color .15s}
+.btn:hover:not(:disabled){border-color:var(--test)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{background:var(--chip);color:var(--onchip);border-color:var(--chip)}
+.btn.opt[data-res="strong"]{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.btn.opt[data-res="weak"]{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.hint{font-size:12px;color:var(--faint);align-self:center}
+.stats{display:flex;gap:18px;margin:4px 0 10px;width:100%}
+.stats b{display:block;font-size:22px;font-weight:650}
+.stats span{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+.rep{width:100%;display:flex;flex-direction:column;gap:9px;margin:2px 0 12px}
+.rep label{font-size:12px;color:var(--faint)}
+.rep input{font:inherit;font-size:14px;padding:9px 12px;border-radius:10px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+.rep input:focus-visible{outline:2px solid var(--test);outline-offset:1px}
+.rep .code{font:13px/1.45 ui-monospace,"Cascadia Mono",Consolas,monospace;
+  background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+  user-select:all;word-break:break-word}
+.rep .note{font-size:11.5px;color:var(--faint);line-height:1.45}
+.rep a.sb{text-decoration:none;display:inline-flex;align-items:center}
+
+/* блок приглашения на семинар */
+.cta{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--tint);
+  padding:14px 15px;margin:2px 0 12px;display:flex;flex-direction:column;gap:9px}
+.cta b{font-size:15px;font-weight:700;line-height:1.3}
+.cta p{margin:0;font-size:12.5px;line-height:1.5;color:var(--faint)}
+.cta .when{font-size:12.5px;line-height:1.5}
+.cta a.go{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+  align-self:flex-start;font:inherit;font-weight:700;font-size:13.5px;padding:10px 18px;
+  border-radius:999px;background:var(--chip);color:var(--onchip);border:1px solid var(--chip)}
+
+/* панель теста */
+#panel{left:50%;transform:translateX(-50%);bottom:22px;width:min(520px,calc(100% - 40px));padding:15px 17px;min-height:168px}
+#panel[data-state="open"]{border-color:var(--prov)}
+#panel[data-state="strong"]{border-color:var(--ok);background:var(--panelok)}
+#panel[data-state="weak"]{border-color:var(--bad);background:var(--panelbad)}
+#panel[data-state="miss"]{border-color:var(--faint)}
+#panel[data-state="computer"]{border-color:var(--test);background:var(--panelcomp)}
+.ph{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pt{font-weight:700;font-size:14.5px}
+.pc{font-size:13px;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums;flex:none}
+.pc[data-warn="true"]{color:var(--bad)}
+.phint{font-size:12px;color:var(--faint);margin-top:3px}
+.pbar{height:5px;border-radius:4px;background:var(--tint);margin:10px 0 9px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--test);border-radius:4px}
+.pbar i[data-warn="true"]{background:var(--bad)}
+.pst{font-size:12.5px;color:var(--ink2);min-height:36px}
+.pst[data-tone="strong"]{color:var(--ok);font-weight:700}
+.pst[data-tone="weak"],.pst[data-tone="miss"]{color:var(--bad);font-weight:700}
+.pbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sb{appearance:none;font:inherit;font-weight:700;font-size:13px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);padding:9px 15px;border-radius:99px;cursor:pointer;min-height:40px}
+.sb:disabled{opacity:.35;cursor:not-allowed}
+.sb[data-current="true"]{background:var(--chip);color:var(--onchip);border-color:var(--chip)}
+.sb[data-tone="prov"][data-current="true"],.sb[data-tone="tap"][data-current="true"]{background:var(--prov);border-color:var(--prov);color:#fff}
+.sb[data-tone="test"][data-current="true"]{background:var(--test);border-color:var(--test);color:#fff}
+.sb[data-done="true"]{background:var(--okbg);color:var(--ok);border-color:var(--ok);opacity:1}
+
+/* маркеры зон */
+#markers{position:fixed;inset:0;pointer-events:none;z-index:3}
+.mk{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;
+  border:2px solid var(--test);background:var(--mkbg);color:var(--ink);
+  font:700 13px/1 system-ui;cursor:pointer;pointer-events:auto;padding:0;
+  box-shadow:0 2px 8px rgba(22,35,42,.22);transition:transform .12s}
+.mk:hover:not(:disabled){transform:translate(-50%,-50%) scale(1.18)}
+.mk[data-result="strong"]{border-color:var(--ok);color:var(--ok);background:var(--panelok)}
+.mk[data-result="weak"]{border-color:var(--bad);color:var(--bad);background:var(--panelbad)}
+.mk[data-dim="true"]{opacity:.28}
+.mk:disabled{cursor:default}
+
+/* журнал и легенда */
+#side{position:fixed;right:20px;top:18px;width:250px;display:flex;flex-direction:column;gap:12px;z-index:6}
+#side .pane{position:relative;inset:auto}
+#legend{padding:12px 14px;font-size:12px;max-height:46vh;overflow:auto}
+#legend div{display:flex;align-items:center;gap:8px;margin:3px 0}
+#legend i{width:12px;height:12px;border-radius:3px;flex:none;box-shadow:0 0 0 1px var(--line)}
+#logwrap{padding:12px 14px;max-height:34vh;overflow:auto}
+#logwrap h2{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);margin:0 0 8px}
+#log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+#log li{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:5px 7px;
+  border-radius:7px;background:var(--tint2)}
+#log b{font-size:10.5px;padding:1px 7px;border-radius:99px;flex:none;font-weight:700}
+#log b.strong{background:var(--okbg);color:var(--ok)}
+#log b.weak{background:var(--badbg);color:var(--bad)}
+#log b.info{background:var(--tint);color:var(--ink2);border:1px solid var(--line)}
+#log:empty::after{content:"Пока пусто";font-size:12px;color:var(--faint)}
+
+#by{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding-bottom:9px;margin-bottom:11px;border-bottom:1px solid var(--line)}
+#by .who{font-size:14px;color:var(--ink2)}
+#by .who b{color:var(--ink);font-weight:650}
+#by .lk{display:flex;gap:12px;flex-wrap:wrap}
+#by b{color:var(--ink)}
+#by a{font-size:14px;color:var(--test);text-decoration:none;white-space:nowrap;
+  border-bottom:1px solid rgba(31,122,108,.38)}
+#by a:hover{border-bottom-color:var(--test)}
+#by a:focus-visible{outline:2px solid var(--test);outline-offset:2px;border-radius:3px}
+
+/* введение */
+#guide{position:fixed;inset:0;z-index:12;overflow:auto;padding:28px 20px 40px;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(7px)}
+.gw{max-width:620px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);padding:24px 26px}
+.gh{font-size:21px;font-weight:650;margin-bottom:10px}
+.gp{font-size:13.5px;color:var(--ink2);line-height:1.6;margin:0 0 14px}
+.gp b{color:var(--ink)}
+.gs{display:flex;gap:14px;margin:0 0 16px}
+.gn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--chip);color:var(--onchip);
+  font:700 13px/28px system-ui;text-align:center}
+.gt{font-weight:650;font-size:14.5px;margin-bottom:3px}
+.gd{font-size:13px;color:var(--ink2);line-height:1.55}
+#guide .pbtns{margin-top:20px}
+
+#dead{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:var(--bg)}
+#dead .dw{max-width:360px;text-align:center;display:flex;flex-direction:column;gap:12px;
+  align-items:center}
+#dead .dt{font-size:18px;font-weight:650;line-height:1.3}
+#dead .dd{font-size:13.5px;color:var(--ink2);line-height:1.55}
+#foot{position:fixed;right:20px;left:auto;bottom:14px;z-index:4;font-size:11px;color:var(--faint);
+  max-width:300px;line-height:1.45;text-align:right;pointer-events:none}
+#foot a{pointer-events:auto}
+#foot .cr{display:block}
+#foot a{color:var(--ink2)}
+@media (max-width:900px){
+  /* Матовое стекло над живой 3D-картинкой телефон пересчитывает на каждом
+     кадре под каждой панелью. На узком экране отказываемся от размытия
+     и делаем фон плотнее — выглядит так же аккуратно, стоит в разы дешевле. */
+  .pane{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--cardsolid)}
+  #guide{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .gw{background:var(--cardsolid)}
+  /* узкий экран: панель сверху и невысокая, модель забирает низ */
+  #head{left:12px;right:12px;top:10px;width:auto;padding:12px 14px;max-height:62vh;overflow-y:auto}
+  /* кнопки всегда на виду: прокручивается только текст, а не вся панель */
+  #head:not([data-screen="done"]){display:flex;flex-direction:column;overflow:hidden}
+  #head:not([data-screen="done"]) > *{flex:none}
+  /* если кнопок много, прокручиваются они, а не вся панель */
+  #head:not([data-screen="done"]) #actions{flex:0 1 auto;min-height:44px;overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent);
+    mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent)}
+  #head:not([data-screen="done"]) #text{flex:1 1 auto;min-height:2.4em;overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    /* мягкий край вместо обрезанной на середине строки */
+    -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 18px),transparent);
+    mask-image:linear-gradient(to bottom,#000 calc(100% - 18px),transparent)}
+  /* на первом экране шкала этапов только отнимает место */
+  #head[data-screen="intro"] #steps{display:none}
+  /* на итоге главное — строка результата и кнопки, им нужен весь экран */
+  #head[data-screen="done"]{max-height:calc(100vh - 28px)}
+  #by{padding-bottom:7px;margin-bottom:9px}
+  #by .who{font-size:13px}
+  #by a{font-size:13px}
+  #title{font-size:18px;margin:2px 0 5px}
+  #text{font-size:12.5px}
+  #steps{margin-top:10px}
+  #actions{margin-top:11px;gap:7px}
+  .btn{font-size:12.5px;padding:7px 12px;min-height:34px}
+
+  /* из боковой колонки оставляем только легенду — полосой под шапкой */
+  #side{position:fixed;left:12px;right:12px;top:auto;width:auto;z-index:5}
+  #logwrap{display:none}
+  #legend{position:relative;inset:auto;display:flex;flex-direction:row;gap:14px;
+    max-height:none;overflow-x:auto;overflow-y:hidden;padding:8px 12px;
+    white-space:nowrap;-webkit-overflow-scrolling:touch}
+  #legend div{margin:0;flex:none}
+  #foot{display:none}
+
+  /* панель теста компактнее — чтобы модели оставалось больше места */
+  /* идёт тест: шапка сворачивается до заголовка, легенда прячется —
+     модель должна быть видна целиком и во время провокации */
+  body[data-testing="1"] #head #by,
+  body[data-testing="1"] #head #text,
+  body[data-testing="1"] #head #steps,
+  body[data-testing="1"] #head #actions{display:none}
+  body[data-testing="1"] #head{padding:10px 14px}
+  body[data-testing="1"] #side{display:none}
+
+  #panel{bottom:12px;width:auto;left:12px;right:12px;transform:none;padding:11px 13px;min-height:0}
+  #panel .pt{font-size:13.5px}
+  #panel .phint{font-size:11.5px;margin-top:2px}
+  #panel .pbar{margin:8px 0 7px}
+  #panel .pst{font-size:12px;min-height:30px}
+  #panel .pbtns{gap:7px;margin-top:8px}
+  #panel .sb{font-size:12.5px;padding:8px 13px;min-height:36px}
+  .gw{padding:20px 18px}
+  #guide{padding:18px 12px 32px}
+}
+@media (max-width:900px) and (orientation:landscape){
+  #head{max-height:62vh;width:min(420px,52vw);right:auto}
+  #side{left:12px;width:min(420px,52vw);right:auto}
+  #panel{left:auto;right:12px;width:min(380px,44vw)}
+}
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<div id="boot"><div class="bt">Тренажёр МЛД-1</div><div class="bs">Загружаю скелет…</div></div>
+<div id="markers"></div>
+<script>
+/* Подстраховка от пустого экрана: если через 40 секунд заставка всё ещё висит,
+   объясняем человеку, что происходит, вместо белого листа. */
+setTimeout(function(){
+  var b=document.getElementById("boot");
+  if(!b || b.hidden) return;
+  var n=document.createElement("div");
+  n.style.cssText="font-size:12.5px;color:var(--faint);max-width:330px;line-height:1.55;margin-top:12px";
+  n.textContent="Загружается дольше обычного: анатомия весит около четырёх мегабайт. "+
+    "Если экран так и останется пустым, откройте ссылку в Safari или Chrome \u2014 "+
+    "встроенные браузеры мессенджеров справляются не всегда.";
+  b.appendChild(n);
+}, 40000);
+</script>
+
+<div class="pane" id="head">
+  <div id="by"></div>
+  <div id="eyebrow"></div>
+  <div id="title"></div>
+  <div id="text"></div>
+  <ol id="steps"><li>Эталон</li><li>6 зон</li><li>Приоритет</li><li>Субзона</li><li>Коррекция</li></ol>
+  <div id="actions"></div>
+</div>
+
+<div class="pane" id="panel" hidden></div>
+<div id="guide" hidden></div>
+<div id="dead" hidden>
+  <div class="dw">
+    <div class="dt">Телефон не выдержал трёхмерную модель</div>
+    <div class="dd">Браузер отключил графику, чтобы не перегружать устройство.
+      Обновите страницу — тренажёр начнётся заново.</div>
+    <button class="btn primary" onclick="location.reload()">Обновить</button>
+  </div>
+</div>
+
+<div id="side">
+  <div class="pane" id="legend" hidden></div>
+  <div class="pane" id="logwrap"><h2>Протокол сеанса</h2><ol id="log"></ol></div>
+</div>
+
+<div id="foot">
+  <span class="cr">Анатомия: «BodyParts3D — The Database Center for Life Science — CC-BY-SA 2.1 Japan»,
+  «Z-Anatomy — the libre 3D atlas of anatomy — CC-BY-SA 4.0».
+  Учебный тренажёр, не медицинский инструмент.</span>
+</div>
+
+<script src="gl.js"></script>
+<script src="render.js"></script>
+<script src="bones.js"></script>
+<script src="zones.js"></script>
+<script src="app.js"></script>
+
+
+</body>
+</html>
